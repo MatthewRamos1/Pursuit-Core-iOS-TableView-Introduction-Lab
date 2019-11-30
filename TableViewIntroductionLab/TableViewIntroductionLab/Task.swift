@@ -66,18 +66,27 @@ struct Task {
         ]
     }
     
-    static func getSections() -> [[Task]] {
-        let sortedTasks = allTasks.sorted { $0.status.rawValue < $1.status.rawValue }
+    static func getSections(_ input: Bool) -> [[Task]] {
+        var sortedTasks = [Task]()
+        sortedTasks = allTasks.sorted { $0.status.rawValue < $1.status.rawValue }
         let uniqueSections = Set(sortedTasks.map { $0.status })
         var sections = Array(repeating: [Task](), count: uniqueSections.count)
         var currentIndex = 0
-        var currentSection = sortedTasks.first?.status ?? Status.notStarted
+        var currentSection = sortedTasks.first?.status ?? Status.completed
+    
         for task in sortedTasks {
             if task.status == currentSection {
                 sections[currentIndex].append(task)
             } else {
                 currentIndex += 1
                 currentSection = task.status
+            }
+        }
+        for index in 0...(sections.count) - 1 {
+            if input == true {
+                sections[index] = sections[index].sorted { $0.dueDate < $1.dueDate}
+            } else {
+                sections[index] = sections[index].sorted { $0.dueDate > $1.dueDate }
             }
         }
         return sections

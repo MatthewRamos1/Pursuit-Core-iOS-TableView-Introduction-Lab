@@ -56,8 +56,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Tasks" id="URx-hU-KYA"/>
+                    <navigationItem key="navigationItem" title="Tasks" id="URx-hU-KYA">
+                        <barButtonItem key="rightBarButtonItem" title="Sort Ascending" id="g2s-yq-zoY">
+                            <connections>
+                                <action selector="sortingButtonPressed:" destination="BYZ-38-t0r" id="2Bu-4c-qdl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="sortingButton" destination="g2s-yq-zoY" id="S26-uv-onh"/>
                         <outlet property="tableView" destination="yP3-kf-h8o" id="Ynp-zc-vyu"/>
                     </connections>
                 </viewController>
